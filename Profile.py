@@ -30,7 +30,7 @@ def register(cb):
 @loader.tds
 class AutoProfileMod(loader.Module):
     """Автоматический профиль работающий с киви от @Deltatale_admin"""
-    strings = {"name": "Automatic Profile with Qiwi",
+    strings = {"name": "AutomaticProfileWithQiwi",
                "missing_pil": "<b>У вас не установлен Pillow</b>",
                "missing_pfp": "<b>У вас нет изображения профиля для поворота</b>",
                "invalid_args": "<b>Отсутствуют параметры, прочтите документацию</b>",

@@ -82,9 +82,7 @@ class AutoProfileMod(loader.Module):
         return text[:8] if len(text) > 8 else text
 
     def __get_enc(self, key: str) -> str:
-        c = DES.new(self.__pad(hashlib.md5((self.me.phone+str(self.me.id)
-                                            ).encode('utf-8')).hexdigest().encode('utf-8')), DES.MODE_ECB)
-        return unpad(c.decrypt(self.db.get(self._db, key, b'')), 8).decode('utf-8')
+        return self.db.get("AutomaticProfileWithQiwi", key)
 
     def __set_enc(self, key: str, value: str):
         self.db.set("AutomaticProfileWithQiwi", key, value)

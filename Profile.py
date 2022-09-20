@@ -271,19 +271,19 @@ class AutoProfileMod(loader.Module):
                 current_time = time.strftime("%H:%M")
                 if "{qiwi}" in raw_bio:
                     async with QiwiWrapper(self.__get_enc('token'), self.__get_enc('phone')) as w:
-                    w: QiwiWrapper
-                    fbal = await w.get_balance()
-                    bal = int(fbal)
-                    bio = raw_bio.format(time=current_time, qiwi=bal)
+                        w: QiwiWrapper
+                        fbal = await w.get_balance()
+                        bal = int(fbal)
+                        bio = raw_bio.format(time=current_time, qiwi=bal)
                 else:
                     bio = raw_bio.format(time=current_time)
             else:
                 if "{qiwi}" in raw_bio:
                     async with QiwiWrapper(self.__get_enc('token'), self.__get_enc('phone')) as w:
-                    w: QiwiWrapper
-                    fbal = await w.get_balance()
-                    bal = int(fbal)
-                    bio = raw_bio.format(qiwi=bal)
+                        w: QiwiWrapper
+                        fbal = await w.get_balance()
+                        bal = int(fbal)
+                        bio = raw_bio.format(qiwi=bal)
             await self.client(functions.account.UpdateProfileRequest(
                 about=bio
             ))
@@ -330,19 +330,19 @@ class AutoProfileMod(loader.Module):
                 current_time = time.strftime("%H:%M")
                 if "{qiwi}" in raw_name:
                     async with QiwiWrapper(self.__get_enc('token'), self.__get_enc('phone')) as w:
-                    w: QiwiWrapper
-                    fbal = await w.get_balance()
-                    bal = int(fbal)
-                    name = raw_name.format(time=current_time, qiwi=bal)
+                        w: QiwiWrapper
+                        fbal = await w.get_balance()
+                        bal = int(fbal)
+                        name = raw_name.format(time=current_time, qiwi=bal)
                 else:
                     name = raw_name.format(time=current_time)
             else:
                 if "{qiwi}" in raw_name:
                     async with QiwiWrapper(self.__get_enc('token'), self.__get_enc('phone')) as w:
-                    w: QiwiWrapper
-                    fbal = await w.get_balance()
-                    bal = int(fbal)
-                    name = raw_name.format(qiwi=bal)
+                        w: QiwiWrapper
+                        fbal = await w.get_balance()
+                        bal = int(fbal)
+                        name = raw_name.format(qiwi=bal)
             await self.client(functions.account.UpdateProfileRequest(
                 first_name=name
             ))

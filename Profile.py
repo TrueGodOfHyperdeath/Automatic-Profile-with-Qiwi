@@ -218,7 +218,6 @@ class AutoProfileMod(loader.Module):
 
             self.pfp_enabled = True
             pfp_degree = 0
-            await self.allmodules.log("start_autopfp")
             await utils.answer(message, self.strings["enabled_pfp"])
 
             while self.pfp_enabled:
@@ -247,7 +246,6 @@ class AutoProfileMod(loader.Module):
             await self.client(functions.photos.DeletePhotosRequest(
                 await self.client.get_profile_photos("me", limit=1)
             ))
-            await self.allmodules.log("stop_autopfp")
             await utils.answer(message, self.strings["pfp_disabled"])
 
     async def autobiocmd(self, message):
@@ -262,7 +260,6 @@ class AutoProfileMod(loader.Module):
 
         self.bio_enabled = True
         self.raw_bio = raw_bio
-        await self.allmodules.log("start_autobio")
         await utils.answer(message, self.strings["enabled_bio"])
 
         while self.bio_enabled is True:
@@ -273,7 +270,7 @@ class AutoProfileMod(loader.Module):
                     async with QiwiWrapper(self.__get_enc('token'), self.__get_enc('phone')) as w:
                         w: QiwiWrapper
                         fbal = await w.get_balance()
-                        bal = int(fbal)
+                        bal = int(fbal.amount)
                         bio = raw_bio.format(time=current_time, qiwi=bal)
                 else:
                     bio = raw_bio.format(time=current_time)
@@ -296,7 +293,6 @@ class AutoProfileMod(loader.Module):
             return await utils.answer(message, self.strings["bio_not_enabled"])
         else:
             self.bio_enabled = False
-            await self.allmodules.log("stop_autobio")
             await utils.answer(message, self.strings["disabled_bio"])
             if "{time}" in self.raw_bio:
                 if "{qiwi}" in self.raw_bio:
@@ -321,7 +317,6 @@ class AutoProfileMod(loader.Module):
 
         self.name_enabled = True
         self.raw_name = raw_name
-        await self.allmodules.log("start_autoname")
         await utils.answer(message, self.strings["enabled_name"])
 
         while self.name_enabled is True:
@@ -332,7 +327,7 @@ class AutoProfileMod(loader.Module):
                     async with QiwiWrapper(self.__get_enc('token'), self.__get_enc('phone')) as w:
                         w: QiwiWrapper
                         fbal = await w.get_balance()
-                        bal = int(fbal)
+                        bal = int(fbal.amount)
                         name = raw_name.format(time=current_time, qiwi=bal)
                 else:
                     name = raw_name.format(time=current_time)
@@ -341,7 +336,7 @@ class AutoProfileMod(loader.Module):
                     async with QiwiWrapper(self.__get_enc('token'), self.__get_enc('phone')) as w:
                         w: QiwiWrapper
                         fbal = await w.get_balance()
-                        bal = int(fbal)
+                        bal = int(fbal.amount)
                         name = raw_name.format(qiwi=bal)
             await self.client(functions.account.UpdateProfileRequest(
                 first_name=name
@@ -355,7 +350,6 @@ class AutoProfileMod(loader.Module):
             return await utils.answer(message, self.strings["name_not_enabled"])
         else:
             self.name_enabled = False
-            await self.allmodules.log("stop_autoname")
             await utils.answer(message, self.strings["disabled_name"])
             if "{time}" in self.raw_name:
                 if "{qiwi}" in self.raw_name:
@@ -391,5 +385,4 @@ class AutoProfileMod(loader.Module):
 
         if pfps_count is None:
             pfps_count = _("all")
-        await self.allmodules.log("delpfp")
         await utils.answer(message, self.strings["removed_pfps"].format(str(pfps_count)))

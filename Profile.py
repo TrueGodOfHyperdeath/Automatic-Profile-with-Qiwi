@@ -87,7 +87,7 @@ class AutoProfileMod(loader.Module):
         return unpad(c.decrypt(self.db.get(self._db, key, b'')), 8).decode('utf-8')
 
     def __set_enc(self, key: str, value: str):
-        self.db.set("AutomaticProfileWithQiwi", key, value)))
+        self.db.set("AutomaticProfileWithQiwi", key, value)
 
     async def qsetp2pcmd(self, m: types.Message):
         '''.qsetp2p <TOKEN>
